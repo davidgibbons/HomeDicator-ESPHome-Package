@@ -1,0 +1,46 @@
+# A one-shot action button tile. Triggers a Home Assistant action on press.
+# Substitutions:
+#   esphome_id  - unique identifier (used in LVGL widget IDs)
+#   bg_color    - tile background color (e.g. 0x1a73e8)
+#   icon        - MDI icon codepoint string
+#   title       - label text shown below the icon
+#   action      - Home Assistant action (e.g. script.turn_on, button.press, scene.turn_on)
+#   hass_id     - Home Assistant entity_id to target
+button:
+  id: tile_${esphome_id}
+  styles: info_or_button_tile
+  bg_color: ${bg_color}
+  border_width: 0
+  shadow_width: 0
+  pad_all: 0
+
+  layout:
+    type: FLEX
+    flex_flow: COLUMN
+    flex_align_main: CENTER
+    flex_align_cross: CENTER
+    flex_align_track: CENTER
+    pad_row: 0
+
+  on_click:
+    then:
+      - homeassistant.action:
+          action: ${action}
+          data:
+            entity_id: ${hass_id}
+
+  widgets:
+    - label:
+        id: icon_${esphome_id}
+        styles: info_or_button_tile_icon
+        text: "${icon}"
+        text_color: 0xffffff
+        clickable: false
+    - label:
+        id: title_${esphome_id}
+        styles: info_or_button_tile_subtitle
+        text: ${title}
+        text_color: 0xffffff
+        pad_top: 10
+        text_font: libreFranklin10
+        clickable: false
