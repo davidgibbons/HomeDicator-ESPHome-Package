@@ -1,0 +1,188 @@
+# Laundry page: 2 status tiles + Cancel button, then 4 action buttons.
+#
+# Set these substitutions in your root config:
+#   laundry_washer_status_entity  - HA entity ID showing washer state (e.g. sensor.washer_status)
+#   laundry_dryer_status_entity   - HA entity ID showing dryer state  (e.g. sensor.dryer_status)
+#   laundry_cancel_entity         - HA entity to call on Cancel press  (e.g. script.laundry_cancel)
+#   laundry_jess_washer_entity    - HA entity to call (e.g. script.jess_washer_start)
+#   laundry_jess_dryer_entity     - HA entity to call (e.g. script.jess_dryer_start)
+#   laundry_kati_washer_entity    - HA entity to call (e.g. script.kati_washer_start)
+#   laundry_kati_dryer_entity     - HA entity to call (e.g. script.kati_dryer_start)
+
+text_sensor:
+  - platform: homeassistant
+    id: laundry_washer_status
+    entity_id: ${laundry_washer_status_entity}
+    internal: true
+    on_value:
+      - lvgl.label.update:
+          id: lbl_washer_status
+          text: !lambda return x;
+
+  - platform: homeassistant
+    id: laundry_dryer_status
+    entity_id: ${laundry_dryer_status_entity}
+    internal: true
+    on_value:
+      - lvgl.label.update:
+          id: lbl_dryer_status
+          text: !lambda return x;
+
+lvgl:
+  pages:
+    - id: laundry_page
+      bg_opa: TRANSP
+      widgets:
+        - !include
+            file: ../app/templates/page_title.yaml
+            vars:
+              title: "Laundry"
+
+        - obj:
+            styles: content_container
+            layout:
+              type: FLEX
+              flex_flow: COLUMN
+              flex_align_main: START
+              flex_align_cross: START
+              pad_row: 9
+
+            widgets:
+
+              # Row 1: Washer status | Dryer status | Cancel
+              - obj:
+                  bg_opa: TRANSP
+                  height: SIZE_CONTENT
+                  width: SIZE_CONTENT
+                  pad_all: 0
+                  layout:
+                    type: FLEX
+                    flex_flow: ROW
+                    pad_column: 9
+                  widgets:
+
+                    - obj:
+                        styles: info_or_button_tile_small
+                        bg_color: 0x1a3a5c
+                        layout:
+                          type: FLEX
+                          flex_flow: COLUMN
+                          flex_align_main: CENTER
+                          flex_align_cross: CENTER
+                          pad_row: 2
+                        widgets:
+                          - label:
+                              text: "\U000F07DB"  # mdi:washing-machine
+                              styles: info_or_button_tile_icon
+                              text_color: 0xffffff
+                              clickable: false
+                          - label:
+                              id: lbl_washer_status
+                              text: "n/a"
+                              text_color: 0xffffff
+                              text_font: libreFranklin10
+                              clickable: false
+                          - label:
+                              text: "Washer"
+                              styles: info_or_button_tile_subtitle
+                              clickable: false
+
+                    - obj:
+                        styles: info_or_button_tile_small
+                        bg_color: 0x1a3a5c
+                        layout:
+                          type: FLEX
+                          flex_flow: COLUMN
+                          flex_align_main: CENTER
+                          flex_align_cross: CENTER
+                          pad_row: 2
+                        widgets:
+                          - label:
+                              text: "\U000F116C"  # mdi:tumble-dryer
+                              styles: info_or_button_tile_icon
+                              text_color: 0xffffff
+                              clickable: false
+                          - label:
+                              id: lbl_dryer_status
+                              text: "n/a"
+                              text_color: 0xffffff
+                              text_font: libreFranklin10
+                              clickable: false
+                          - label:
+                              text: "Dryer"
+                              styles: info_or_button_tile_subtitle
+                              clickable: false
+
+                    - !include
+                        file: ../app/templates/tiles/button/square_small.yaml
+                        vars:
+                          esphome_id: btn_cancel
+                          bg_color: "0x7b1c1c"
+                          icon: "\U000F0159"  # mdi:cancel
+                          title: "Cancel"
+                          action: script.turn_on
+                          hass_id: ${laundry_cancel_entity}
+
+              # Row 2: Jess Washer | Jess Dryer
+              - obj:
+                  bg_opa: TRANSP
+                  height: SIZE_CONTENT
+                  width: SIZE_CONTENT
+                  pad_all: 0
+                  layout:
+                    type: FLEX
+                    flex_flow: ROW
+                    pad_column: 9
+                  widgets:
+
+                    - !include
+                        file: ../app/templates/tiles/button/square_small.yaml
+                        vars:
+                          esphome_id: btn_jess_washer
+                          bg_color: "0x1a5276"
+                          icon: "\U000F07DB"  # mdi:washing-machine
+                          title: "Jess Washer"
+                          action: script.turn_on
+                          hass_id: ${laundry_jess_washer_entity}
+
+                    - !include
+                        file: ../app/templates/tiles/button/square_small.yaml
+                        vars:
+                          esphome_id: btn_jess_dryer
+                          bg_color: "0x1a5276"
+                          icon: "\U000F116C"  # mdi:tumble-dryer
+                          title: "Jess Dryer"
+                          action: script.turn_on
+                          hass_id: ${laundry_jess_dryer_entity}
+
+              # Row 3: Kati Washer | Kati Dryer
+              - obj:
+                  bg_opa: TRANSP
+                  height: SIZE_CONTENT
+                  width: SIZE_CONTENT
+                  pad_all: 0
+                  layout:
+                    type: FLEX
+                    flex_flow: ROW
+                    pad_column: 9
+                  widgets:
+
+                    - !include
+                        file: ../app/templates/tiles/button/square_small.yaml
+                        vars:
+                          esphome_id: btn_kati_washer
+                          bg_color: "0x4a235a"
+                          icon: "\U000F07DB"  # mdi:washing-machine
+                          title: "Kati Washer"
+                          action: script.turn_on
+                          hass_id: ${laundry_kati_washer_entity}
+
+                    - !include
+                        file: ../app/templates/tiles/button/square_small.yaml
+                        vars:
+                          esphome_id: btn_kati_dryer
+                          bg_color: "0x4a235a"
+                          icon: "\U000F116C"  # mdi:tumble-dryer
+                          title: "Kati Dryer"
+                          action: script.turn_on
+                          hass_id: ${laundry_kati_dryer_entity}
