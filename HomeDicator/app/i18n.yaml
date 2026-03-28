@@ -1,18 +1,18 @@
 external_components:
   - source:
-      type: local
-      path: ${homedicator_package_dir}/i18n_component/components
+      type: git
+      url: https://github.com/konstantint/esphome_i18n_component
     components: [i18n]
 
 esphome:
   includes:
-    - ${homedicator_package_dir}/HomeDicator/app/i18n_helper.h
+    - i18n_helper.h
 
 i18n:
   sources:
-    - ${homedicator_package_dir}/HomeDicator/translations/de.yaml
-    - ${homedicator_package_dir}/HomeDicator/translations/en.yaml
-    - ${homedicator_package_dir}/HomeDicator/translations/ru.yaml
+    - ../translations/de.yaml
+    - ../translations/en.yaml
+    - ../translations/ru.yaml
 
 select:
   - platform: lvgl
