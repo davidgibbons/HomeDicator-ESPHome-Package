@@ -10,9 +10,9 @@ esphome:
 
 i18n:
   sources:
-    - ../translations/de.yaml
-    - ../translations/en.yaml
-    - ../translations/ru.yaml
+    - translations/de.yaml
+    - translations/en.yaml
+    - translations/ru.yaml
 
 select:
   - platform: lvgl
