@@ -63,4 +63,4 @@ lvgl:
                             pad_bottom: 20
                             text_font: libreFranklin18
                             text_color: 0xa6a6a6
-                            text: !lambda return tr_label(id(lbl_connecting), "waiting_for_home_assistant");
+                            text: "Waiting for Home Assistant..."

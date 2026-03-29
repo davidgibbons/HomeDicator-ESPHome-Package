@@ -13,7 +13,7 @@ obj:
         text_color: 0xFFFFFF
         text_font: libreFranklin24
         text_align: CENTER
-        text: !lambda return tr_label(id(lbl_settings), "settings.settings");
+        text: "Settings"
     - button:
         styles: back_button
         bg_opa: TRANSP
@@ -48,4 +48,4 @@ obj:
                     pad_all: 0
                     text_color: 0xffffff
                     text_font: libreFranklin18
-                    text: !lambda return tr_label(id(lbl_back_settings), "back");
+                    text: "Back"

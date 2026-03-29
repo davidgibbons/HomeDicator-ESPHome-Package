@@ -30,7 +30,6 @@ api:
 
 packages:
   # Include all UI components in the right order
-  i18n: !include app/i18n.yaml
   gradients: !include app/gradients.yaml
   navigation: !include app/navigation.yaml
   pager_dots: !include app/bottom_pager_dots.yaml
