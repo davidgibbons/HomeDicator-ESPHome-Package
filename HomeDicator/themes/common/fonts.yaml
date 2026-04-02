@@ -56,6 +56,7 @@ font:
       "\U000F18DE", # mdi:ceiling-light-multiple-outline
       "\U000F17C7", # mdi:ceiling-light-outline
       "\U000F0127", # mdi:chart-areaspline
+      "\U000F0159", # mdi:cancel
       "\U000F015F", # mdi:cloud
       "\U000F0163", # mdi:cloud-outline
       "\U000F095F", # mdi:desk-lamp
@@ -151,7 +152,9 @@ font:
       "\U000F06EE", # mdi:mailbox
       "\U000F0D8C", # mdi:mailbox-outline
       "\U000F035B", # mdi:memory
+      "\U000F116C", # mdi:tumble-dryer
       "\U000F117B", # mdi:meditation
+      "\U000F07DB", # mdi:washing-machine
       "\U000F07DC", # mdi:micro-sd
       "\U000F0C99", # mdi:microwave
       "\U000F12FE", # mdi:molecule-co
