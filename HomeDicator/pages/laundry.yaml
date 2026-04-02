@@ -272,7 +272,7 @@ lvgl:
                           - button:
                               width: 148
                               height: 78
-                              bg_color: 0x1a6b2a
+                              bg_color: 0x2e7d32
                               border_width: 0
                               shadow_width: 0
                               radius: 10
@@ -313,7 +313,7 @@ lvgl:
                           - button:
                               width: 148
                               height: 78
-                              bg_color: 0x7b1c1c
+                              bg_color: 0xc62828
                               border_width: 0
                               shadow_width: 0
                               radius: 10
