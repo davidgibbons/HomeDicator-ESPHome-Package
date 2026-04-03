@@ -4,8 +4,7 @@
 #   laundry_washer_status_entity  - HA entity showing washer state
 #   laundry_dryer_status_entity   - HA entity showing dryer state
 #   laundry_cancel_entity         - HA script/button to call on Cancel
-#   laundry_submit_entity         - HA script to call on Start
-#                                   (must accept variables: person, device)
+#   (no submit entity needed - fires esphome.laundry_start event with person+device)
 
 globals:
   - id: laundry_person
@@ -278,13 +277,11 @@ lvgl:
                               radius: 10
                               on_click:
                                 then:
-                                  - homeassistant.action:
-                                      action: script.turn_on
+                                  - homeassistant.event:
+                                      event: esphome.laundry_start
                                       data:
-                                        entity_id: ${laundry_submit_entity}
-                                        variables:
-                                          person: !lambda return id(laundry_person);
-                                          device: !lambda return id(laundry_device);
+                                        person: !lambda return id(laundry_person);
+                                        device: !lambda return id(laundry_device);
                                   - lvgl.widget.update:
                                       id: btn_device_washer
                                       state:
